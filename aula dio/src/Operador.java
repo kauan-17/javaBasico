@@ -10,12 +10,13 @@ public class Operador {
         numero = numero * - 1;
         System.out.println(numero); // valor positivos
     // -----------------------------------------------------------------------------
-        //como aumenta o valor sem fazer alteraçõa na variavel inicial
+       
+        //como aumentar o valor sem fazer alteração na variavel inicial
         numero = numero + 1 ;
         System.out.println(numero); //almentarndo o valor em mas 1 
         
-//-----------------------------------------------------------------------------------
-// variável booleana
+    //-------------------------------------------------------------------------------
+    // variável booleana
         variaveis = !variaveis; //deixar negativo
     
         System.out.println(variaveis);
