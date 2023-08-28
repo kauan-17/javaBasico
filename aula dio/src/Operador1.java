@@ -8,8 +8,6 @@ public class Operador1 {
         System.out.println(resultado);
         //valores do tipo inteiro
         int resultado1 = a==b ? 1 : 0;
-       
-        
         System.out.println(resultado1);
 
    /*EXEMPLO DE CONDICIONAL UTILIZANDO UMA ESTRUTURA IF/ELSE sem o valor de boolean
