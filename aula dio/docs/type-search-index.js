@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Comentario"},{"p":"<Unnamed>","l":"EsprexaoLogica"},{"p":"<Unnamed>","l":"Operador"},{"p":"<Unnamed>","l":"Operador1"},{"p":"<Unnamed>","l":"TiposVariaveis"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"SmartTV"},{"p":"<Unnamed>","l":"Usuario"}];updateSearchResults();
