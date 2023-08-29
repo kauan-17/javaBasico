@@ -4,12 +4,13 @@ public class CaixaEletronico{
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        double saldo,valorSolicitado;
 
         System.out.println("Digitar o seu saldo atual: ");
-        double saldo =scanner.nextDouble();
+         saldo =scanner.nextDouble();
 
         System.out.println("Digitar o valor a ser sacado: ");
-        double valorSolicitado = scanner.nextDouble();
+         valorSolicitado = scanner.nextDouble();
 
         if(valorSolicitado<saldo){
             saldo = saldo -valorSolicitado;
