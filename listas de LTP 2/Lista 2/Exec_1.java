@@ -1,4 +1,4 @@
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane; // Importa a classe JOptionPane para interação com o usuário.
 
 public class Exec_1 {
     // Método para encontrar a primeira posição de um caractere em uma string
@@ -22,6 +22,7 @@ public class Exec_1 {
         }
     }
 
+    // Método para verificar se há caracteres duplicados em uma string
     public static int verificarDuplicados(String inputString) {
         try {
             for (int i = 0; i < inputString.length(); i++) {
@@ -45,6 +46,7 @@ public class Exec_1 {
         }
     }
 
+    // Método para encontrar o maior caractere em uma string
     public static char encontrarMaxCharacter(String inputString) {
         try {
             char maxChar = inputString.charAt(0);
@@ -68,11 +70,16 @@ public class Exec_1 {
 
     public static void main(String[] args) {
         try {
+            // Solicita ao usuário que insira uma string usando JOptionPane
             String inputString = JOptionPane.showInputDialog("Digite uma string:");
+
+            // Solicita ao usuário que insira um caractere para verificar sua posição na string usando JOptionPane
             char targetChar = JOptionPane.showInputDialog("Digite um caractere para verificar sua posição na string:").charAt(0);
 
+            // Chama o método para encontrar a posição do caractere na string
             int position = encontrarCharacterPosition(inputString, targetChar);
 
+            // Exibe o resultado usando JOptionPane
             if (position != -1) {
                 JOptionPane.showMessageDialog(
                         null,
@@ -89,8 +96,10 @@ public class Exec_1 {
                 );
             }
 
+            // Chama o método para verificar se há caracteres duplicados na string
             int result = verificarDuplicados(inputString);
 
+            // Exibe o resultado usando JOptionPane
             if (result == 1) {
                 JOptionPane.showMessageDialog(
                         null,
@@ -107,8 +116,10 @@ public class Exec_1 {
                 );
             }
 
+            // Chama o método para encontrar o maior caractere na string
             char maxCharacter = encontrarMaxCharacter(inputString);
 
+            // Exibe o resultado usando JOptionPane
             if (maxCharacter != '\0') {
                 JOptionPane.showMessageDialog(
                         null,
