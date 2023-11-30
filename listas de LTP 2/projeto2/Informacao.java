@@ -15,26 +15,8 @@ public class Informacao {
 		Scanner leia = new Scanner(System.in);
 		int id = 0;
 		
-		//inicializar(path);
 		Contato c = new Contato();
-		try {
-			gravarContato(c, path);
-			Contato contato = lerProcesso(id,path);
-			System.out.println("Contato: "+contato.id
-					+" "+contato.tipoAcao
-					+" "+contato.nomeAutor
-					+" "+contato.dataNascimentoAutor
-					+" "+contato.emailAutor
-					+" "+contato.cpfAutor
-					+" "+contato.nomeReu
-					+" "+contato.dateNascimentoReu
-					+" "+contato.emailReu
-					+" "+contato.cpfReu				
-					);
-		} catch (Exception e) {
-			System.out.println("arquivo não pode ser lido/gravado");
-			e.printStackTrace();
-		}
+
 		do {
 			menu();
 			op = leia.nextInt();
@@ -45,7 +27,7 @@ public class Informacao {
 				};
 				break;
 			case 2:
-			System.out.println("Digite o CPF que deseja buscar:");
+			System.out.println("Digite o CPF/CNPJ que deseja buscar: ");
 			String cpfBusca = leia.next();
 			BuscarPorCpf(cpfBusca, path);
 			break;
@@ -56,7 +38,7 @@ public class Informacao {
 				RemoverInformacao(path);
 				break;
 			case 5:
-			System.out.println("Digite o ID do contato que deseja reescrever:");
+			System.out.println("Digite o número do processo que deseja reescrever: ");
 			int idReescrever = leia.nextInt();
 			ReescreverInformacao(idReescrever, path);
 				break;
@@ -110,27 +92,27 @@ public class Informacao {
 			
 	
 			if (c != null) {
-				System.out.println("Numero do processo: ");
+				System.out.println("Número do processo: ");
 				c.id =leia.nextInt();
 				leia = new Scanner(System.in);
-				System.out.println("Qual foi a ação ocorrida: ");
+				System.out.println("Qual o tipo de ação: ");
 				c.tipoAcao= leia.nextLine();
-				System.out.println("Nome do autor: ");
+				System.out.println("Nome do(a) Autor(a)/Vítima: ");
 				c.nomeAutor = leia.nextLine();
-				System.out.println("Data de nascimento do autor: ");
+				System.out.println("Data de nascimento do(a) Autor(a)/Vítima: ");
 				c.dataNascimentoAutor= leia.nextLine();
-				System.out.println("Email do Autor: ");
+				System.out.println("Email do(a) Autor(a)/Vítima: ");
 				c.emailAutor = leia.nextLine();
-				System.out.println("CPF do Autor");
+				System.out.println("CPF/CNPJ do(a) Autor(a)/Vítima: ");
 				c.cpfAutor = leia.nextLine();
 
-				System.out.println("Nome do Reu: ");
+				System.out.println("Nome da(o) Ré(u): ");
 				c.nomeReu = leia.nextLine();
-				System.out.println("Data de nascimento do Reu: ");
+				System.out.println("Data de nascimento da(o) Ré(u): ");
 				c.dateNascimentoReu= leia.nextLine();
-				System.out.println("Email Reu: ");
+				System.out.println("Email da(o) Ré(u): ");
 				c.emailReu = leia.nextLine();
-				System.out.println("CPF do Reu");
+				System.out.println("CPF/CNPJ da(o) Ré(u): ");
 				c.cpfReu = leia.nextLine();
 	
 				gravarContato(c, path);
@@ -141,7 +123,7 @@ public class Informacao {
 		}
 
 		catch (IOException e) {
-			System.out.println("Erro ao cadrastra informações do Processo.");
+			System.out.println("Erro ao cadrastrar informações do Processo.");
 			e.printStackTrace();
 		}
 		try {
@@ -158,46 +140,54 @@ public class Informacao {
 	}
 
 	private static void BuscarPorCpf(String cpf, String path) {
-    File diretorio = new File(path);
-
-    // Verifica se o diretório existe
-    if (diretorio.exists() && diretorio.isDirectory()) {
-        File[] arquivos = diretorio.listFiles();
-
-        // Verifica se há arquivos no diretório
-        if (arquivos != null && arquivos.length > 0) {
-            for (File arquivo : arquivos) {
-                if (arquivo.isFile() && arquivo.getName().endsWith(".txt")) {
-                    try {
-                        Contato contato = lerProcesso(Integer.parseInt(arquivo.getName().replace(".txt", "")), path);
-
-                        if (contato.cpfAutor.equals(cpf) || contato.cpfReu.equals(cpf)) {
-                            System.out.println("Contato encontrado:");
-                            System.out.println("ID: " + contato.id);
-                            System.out.println("Tipo da Ação: " + contato.tipoAcao);
-                            System.out.println("Nome Autor: " + contato.nomeAutor);
-                            System.out.println("Data de Nascimento do Autor:" + contato.dataNascimentoAutor);
-                            System.out.println("Email do Autor: " + contato.emailAutor);
-                            System.out.println("CPF Autor: " + contato.cpfAutor);
-                            System.out.println("Nome Reu: " + contato.nomeReu);
-                            System.out.println("Data de Nascimento do Reu:" + contato.dateNascimentoReu);
-                            System.out.println("Email do Reu: " + contato.emailReu);
-                            System.out.println("CPF Reu: " + contato.cpfReu);
-                            System.out.println("-------------------------");
-                        }
-                    } catch (IOException e) {
-                        System.out.println("Erro ao ler informações do arquivo: " + arquivo.getName());
-                        e.printStackTrace();
-                    }
-                }
-            }
-        } else {
-            System.out.println("Nenhum contato encontrado.");
-        }
-    } else {
-        System.out.println("Diretório não encontrado.");
-    }
-}
+		// Cria um objeto File representando o diretório especificado pelo caminho
+		File diretorio = new File(path);
+	
+		// Verifica se o diretório existe e é um diretório
+		if (diretorio.exists() && diretorio.isDirectory()) {
+			// Lista todos os arquivos no diretório
+			File[] arquivos = diretorio.listFiles();
+	
+			// Verifica se há arquivos no diretório
+			if (arquivos != null && arquivos.length > 0) {
+				// Itera sobre cada arquivo no diretório
+				for (File arquivo : arquivos) {
+					// Verifica se o arquivo atual é um arquivo regular e tem a extensão ".txt"
+					if (arquivo.isFile() && arquivo.getName().endsWith(".txt")) {
+						try {
+							// Lê as informações de contato do arquivo atual
+							Contato contato = lerProcesso(Integer.parseInt(arquivo.getName().replace(".txt", "")), path);
+	
+							// Verifica se o CPF fornecido corresponde ao CPF do contato (autor ou réu)
+							if (contato.cpfAutor.equals(cpf) || contato.cpfReu.equals(cpf)) {
+								// Exibe os detalhes do processo correspondente
+								System.out.println("Processo(s) encontrado(s):");
+								System.out.println("Número do Processo: " + contato.id);
+								System.out.println("Tipo de Ação: " + contato.tipoAcao);
+								System.out.println("Nome do(a) Autor(a)/Vítima: " + contato.nomeAutor);
+								System.out.println("Data de Nascimento do(a) Autor(a)/Vítima:" + contato.dataNascimentoAutor);
+								System.out.println("Email do(a) Autor(a)/Vítima: " + contato.emailAutor);
+								System.out.println("CPF/CNPJ do(a) Autor(a)/Vítima: " + contato.cpfAutor);
+								System.out.println("Nome da(o) Ré(u): " + contato.nomeReu);
+								System.out.println("Data de Nascimento da(o) Ré(u):" + contato.dateNascimentoReu);
+								System.out.println("Email da(o) Ré(u): " + contato.emailReu);
+								System.out.println("CPF/CNPJ da(o) Ré(u): " + contato.cpfReu);
+								System.out.println("-------------------------");
+							}
+						} catch (IOException e) {
+							System.out.println("Erro ao ler informações do arquivo: " + arquivo.getName());
+							e.printStackTrace();
+						}
+					}
+				}
+			} else {
+				System.out.println("Nenhum processo encontrado.");
+			}
+		} else {
+			System.out.println("Diretório não encontrado.");
+		}
+	}
+	
 
 	private static void ListarInformacao(String path) {
 		File diretorio = new File(path);
@@ -212,18 +202,18 @@ public class Informacao {
 					if (arquivo.isFile() && arquivo.getName().endsWith(".txt")) {
 						try {
 							Contato contato = lerProcesso(Integer.parseInt(arquivo.getName().replace(".txt", "")), path);
-							System.out.println("Contato encontrado:");
-							System.out.println("ID: " + contato.id);
-							System.out.println("Tipo da Ação: "+contato.tipoAcao);
-							System.out.println("Nome Autor: " + contato.nomeAutor);
-							System.out.println("Data de Nascimento do Autor:"+contato.dataNascimentoAutor);
-							System.out.println("Email do Autor: "+contato.emailAutor);
-							System.out.println("CPF Autor: "+contato.cpfAutor);
-							System.out.println("Nome Reu: " + contato.nomeReu);
-							System.out.println("Data de Nascimento do Reu:"+contato.dateNascimentoReu);
-							System.out.println("Email do Reu: "+contato.emailReu);
-							System.out.println("CPF Reu: "+contato.cpfReu);
-							System.out.println("-------------------------");
+							 System.out.println("Processo(s) encontrado(s):");
+	                            System.out.println("Número do Processo: " + contato.id);
+	                            System.out.println("Tipo de Ação: " + contato.tipoAcao);
+	                            System.out.println("Nome do(a) Autor(a)/Vítima: " + contato.nomeAutor);
+	                            System.out.println("Data de Nascimento do(a) Autor(a)/Vítima:" + contato.dataNascimentoAutor);
+	                            System.out.println("Email do(a) Autor(a)/Vítima: " + contato.emailAutor);
+	                            System.out.println("CPF/CNPJ do(a) Autor(a)/Vítima: " + contato.cpfAutor);
+	                            System.out.println("Nome da(o) Ré(u): " + contato.nomeReu);
+	                            System.out.println("Data de Nascimento da(o) Ré(u):" + contato.dateNascimentoReu);
+	                            System.out.println("Email da(o) Ré(u): " + contato.emailReu);
+	                            System.out.println("CPF/CNPJ da(o) Ré(u): " + contato.cpfReu);
+	                            System.out.println("-------------------------");
 						} catch (IOException e) {
 							System.out.println("Erro ao ler informações do arquivo: " + arquivo.getName());
 							e.printStackTrace();
@@ -241,7 +231,7 @@ public class Informacao {
 	private static void RemoverInformacao(String path) {
 		Scanner leia = new Scanner(System.in);
 	
-		System.out.println("Digite o ID do contato que deseja remover:");
+		System.out.println("Digite o número do processo que deseja remover: ");
 		int id = leia.nextInt();
 	
 		try {
@@ -270,36 +260,54 @@ public class Informacao {
 			Contato c = lerProcesso(id, path);
 	
 			if (c != null) {
-				System.out.println("Numero do processo: ");
+				System.out.println("Número do processo: ");
 				c.id =leia.nextInt();
+
+				try {
+						File arquivo = new File(path + id + ".txt");
+	
+						if (arquivo.exists()) {
+							if (arquivo.delete()) {
+								System.out.println("Processo pronto para ser reescrito.");
+							} else {
+								System.out.println("Falha ao reescrever o Processo.");
+							}
+						} else {
+							System.out.println("Processo não encontrado.");
+						}
+					} catch (Exception e) {
+						System.out.println("Erro ao remover o Processo.");
+						e.printStackTrace();
+					}
+
 				leia = new Scanner(System.in);
-				System.out.println("Qual foi a ação ocorrida: ");
+				System.out.println("Tipo de Ação: ");
 				c.tipoAcao= leia.nextLine();
-				System.out.println("Nome do autor: ");
+				System.out.println("Nome do(a) autor(a)/Vítima: ");
 				c.nomeAutor = leia.nextLine();
-				System.out.println("Data de nascimento do autor: ");
+				System.out.println("Data de nascimento do(a) autor(a)/Vítima: ");
 				c.dataNascimentoAutor= leia.nextLine();
-				System.out.println("Email do Autor: ");
+				System.out.println("Email do(a) Autor(a)/Vítima: ");
 				c.emailAutor = leia.nextLine();
-				System.out.println("CPF do Autor");
+				System.out.println("CPF/CNPJ do(a) Autor(a)/Vítima: ");
 				c.cpfAutor = leia.nextLine();
 
-				System.out.println("Nome do Reu: ");
+				System.out.println("Nome do Réu: ");
 				c.nomeReu = leia.nextLine();
-				System.out.println("Data de nascimento do Reu: ");
+				System.out.println("Data de nascimento da(o) Ré(u): ");
 				c.dateNascimentoReu= leia.nextLine();
-				System.out.println("Email Reu: ");
+				System.out.println("Email da(o) Ré(u): ");
 				c.emailReu = leia.nextLine();
-				System.out.println("CPF do Reu");
+				System.out.println("CPF/CNPJ da(o) Ré(u): ");
 				c.cpfReu = leia.nextLine();
 	
 				gravarContato(c, path);
-				System.out.println("Contato reescrito com sucesso.");
+				System.out.println("Processo reescrito com sucesso.");
 			} else {
-				System.out.println("Contato não encontrado.");
+				System.out.println("Processo não encontrado.");
 			}
 		} catch (IOException e) {
-			System.out.println("Erro ao reescrever informações do contato.");
+			System.out.println("Erro ao reescrever informações do processo.");
 			e.printStackTrace();
 		}
 	} 
@@ -310,7 +318,7 @@ public class Informacao {
 				+ "\n2 - Buscar"
 				+ "\n3 - Listar"
 				+ "\n4 - Remover"
-				+ "\n5 - Reescreve"
+				+ "\n5 - Reescrever"
 				+ "\n6 - Sair"
 				+ "-------------------------");
 		
@@ -318,7 +326,7 @@ public class Informacao {
 
 	private static void menuCadastro(){
 		System.out.println("-----------------------------"
-							+ "\n1 - Vara cível"
+							+ "\n1 - Vara Cível"
 							+ "\n2 - Vara Criminal"
 							+ "\n3 - Vara das Fazendas Públicas "
 							+ "\n4 - Sair");
@@ -393,18 +401,5 @@ public class Informacao {
 		}
 	
 	}
-	/* 
-	private static int lerId() {
-		BufferedReader bf;
-		int id=0;
-		try {
-			bf = new BufferedReader(new FileReader("id.txt"));
-			id = Integer.parseInt(bf.readLine());
-			bf.close();
-		} catch (IOException | NumberFormatException e) {
-			System.err.println("Id não encontrado");
-			e.printStackTrace();
-		}		
-		return id;
-	}*/
+	
 }
